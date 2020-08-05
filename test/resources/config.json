@@ -1,0 +1,11 @@
+{
+  "db": {
+    "host": "localhost",
+    "port": 35000,
+    "name": "Nina"
+  },
+  "file":{
+    "name": "config",
+    "type": "json"
+  }
+}
