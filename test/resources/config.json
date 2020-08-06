@@ -2,7 +2,7 @@
   "db": {
     "host": "localhost",
     "port": 35000,
-    "name": "Nina"
+    "user": "Nina"
   },
   "file":{
     "name": "config",
