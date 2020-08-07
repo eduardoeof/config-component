@@ -15,7 +15,7 @@
   (let [system-map (create-and-start-system-map "test/resources/config.json")]
     (is (.equals (:config system-map)
                  {:db {:host "localhost"
-                       :port (int 35000)
+                       :port (int 35000) ; credits to cheshire issue#105
                        :user "Nina"}
                   :file {:name "config"
                          :type "json"}
