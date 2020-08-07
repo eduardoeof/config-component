@@ -26,10 +26,12 @@
 
 (defrecord Config [file-name] 
   component/Lifecycle
+
   (start [this]
-    (case (get-file-type file-name) 
-      :json (parse-json file-name)
-      :yaml (parse-yaml file-name)))
+    (let [config (case (get-file-type file-name) 
+                   :json (parse-json file-name)
+                   :yaml (parse-yaml file-name))]
+      (merge this config)))
 
   (stop [this]
     nil))

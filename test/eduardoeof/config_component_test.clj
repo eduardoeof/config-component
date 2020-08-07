@@ -3,27 +3,39 @@
             [com.stuartsierra.component :as component]
             [eduardoeof.config-component :refer [new-config]]))
 
-(defn- create-and-start-system-map
-  [file-name]
+(defn- create-and-start-system-map [file-name]
   (component/start
     (component/system-map
       :config (new-config file-name))))
 
+(defn- stop-system-map [file-name]
+  (component/stop (create-and-start-system-map file-name)))
+
 (deftest load-config-json-file-test
   (let [system-map (create-and-start-system-map "test/resources/config.json")]
-    (is (= {:db {:host "localhost"
-                 :port 35000
-                 :user "Nina"}
-            :file {:name "config"
-                   :type "json"}} 
-           (:config system-map)))))
+    (is (.equals (:config system-map)
+                 {:db {:host "localhost"
+                       :port (int 35000)
+                       :user "Nina"}
+                  :file {:name "config"
+                         :type "json"}
+                  :file-name "test/resources/config.json"}))))
 
 (deftest load-config-yaml-file-test
   (let [system-map (create-and-start-system-map "test/resources/config.yml")]
-    (is (= {:db {:host "localhost"
-                 :port 35000
-                 :user "Nina"}
-            :file {:name "config"
-                   :type "yaml"}} 
+    (is (.equals (:config system-map)
+                 {:file-name "test/resources/config.yml"
+                  :db {:host "localhost"
+                       :port 35000
+                       :user "Nina"}
+                  :file {:name "config"
+                         :type "yaml"}}))))
+
+(deftest stop-config-component-test
+  (let [system-map (stop-system-map "test/resources/config.yml")]
+    (is (= nil
            (:config system-map)))))
 
+(comment
+  (use 'clojure.test)
+  (run-tests))
