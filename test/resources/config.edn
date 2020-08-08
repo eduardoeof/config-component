@@ -1,0 +1,6 @@
+
+{:db {:host "localhost"
+       :port 35000
+       :user "Nina"}
+  :file {:name "config"
+         :type "edn"}}

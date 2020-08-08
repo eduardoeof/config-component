@@ -2,7 +2,8 @@
   (:require [com.stuartsierra.component :as component]
             [cheshire.core :as json]
             [clj-yaml.core :as yaml]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [clojure.edn :as edn]))
 
 (defn- yml? [type]
   (= type :yml))
@@ -24,13 +25,19 @@
       slurp 
       (json/parse-string true)))
 
+(defn parse-edn [file-name]
+  (-> file-name
+      slurp
+      edn/read-string))
+
 (defrecord Config [file-name] 
   component/Lifecycle
 
   (start [this]
     (let [config (case (get-file-type file-name) 
                    :json (parse-json file-name)
-                   :yaml (parse-yaml file-name))]
+                   :yaml (parse-yaml file-name)
+                   :edn  (parse-edn file-name))]
       (merge this config)))
 
   (stop [this]

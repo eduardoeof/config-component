@@ -31,6 +31,16 @@
                   :file {:name "config"
                          :type "yaml"}}))))
 
+(deftest load-config-edn-file-test
+  (let [system-map (create-and-start-system-map "test/resources/config.edn")]
+    (is (.equals (:config system-map)
+                 {:file-name "test/resources/config.edn"
+                  :db {:host "localhost"
+                       :port 35000
+                       :user "Nina"}
+                  :file {:name "config"
+                         :type "edn"}}))))
+
 (deftest stop-config-component-test
   (let [system-map (stop-system-map "test/resources/config.yml")]
     (is (= nil
