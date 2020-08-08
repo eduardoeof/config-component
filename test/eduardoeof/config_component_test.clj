@@ -46,6 +46,40 @@
     (is (= nil
            (:config system-map)))))
 
+(deftest load-config-file-without-format
+  (try
+    (create-and-start-system-map "test/resources/fake-config.xyz")
+    (catch Throwable t
+      (let [ex (-> t 
+                   Throwable->map 
+                   :via 
+                   last)] 
+        (is (= "File format not supported"
+               (:message  ex)))
+        (is (= {:reason :eduardoeof.config-component/file-format-not-supported-exception
+                :file-name "test/resources/fake-config.xyz"
+                :format :xyz
+                :tip "Check if the file name has the format explicited (e.g. \".json\") or it is in an unsupported format."}
+               (:data ex)))))))
+
+(deftest load-config-file-with-not-supported-format
+  (try
+    (create-and-start-system-map "test/resources/fake-config")
+    (catch Throwable t
+      (let [ex (-> t 
+                   Throwable->map 
+                   :via 
+                   last)] 
+        (is (= "File format not supported"
+               (:message  ex)))
+        (is (= {:reason :eduardoeof.config-component/file-format-not-supported-exception
+                :file-name "test/resources/fake-config"
+                :format :unknown
+                :tip "Check if the file name has the format explicited (e.g. \".json\") or it is in an unsupported format."}
+               (:data ex)))))) )
+
+; file not found
+
 (comment
   (use 'clojure.test)
   (run-tests))
