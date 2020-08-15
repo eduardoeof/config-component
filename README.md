@@ -53,7 +53,7 @@ Important to meation that all key will be converted as keywords, no matter the f
 
 If the config file name doesn't have an extention or the file doesn't exist, an exception will be thrwon:
 
-![exception](./img/exception.png "Expection")
+![exception](img/expection.png)
 
 ## License
 
