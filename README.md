@@ -4,7 +4,7 @@ A stuartsierra/component for config files in JSON, YAML and EDN formats. Based o
 
 ## Latest version
 
-; Add clojar link
+[![Clojars Project](https://img.shields.io/clojars/v/eduardoeof/config-component.svg)](https://clojars.org/eduardoeof/config-component)
 
 ## Usage
 
