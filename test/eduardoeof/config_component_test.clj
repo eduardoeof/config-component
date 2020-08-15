@@ -78,8 +78,6 @@
                 :tip "Check if the file name has the format explicited (e.g. \".json\") or it is in an unsupported format."}
                (:data ex)))))) )
 
-; file not found
-
 (comment
   (use 'clojure.test)
   (run-tests))
