@@ -47,7 +47,7 @@ After the execution of `component/start`, the content of `:config` in the system
    :file-name "my-config-file.json"}}
 ```
 
-Important to meation that all key will be converted as keywords, no matter the format of the file. Also the file name is added in the map as `:file-name`.
+Important to meation that all keys will be converted as keywords, no matter the format of the file. Also the file name is added in the map as `:file-name`.
 
 ### Error
 
