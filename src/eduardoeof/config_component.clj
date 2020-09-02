@@ -5,6 +5,10 @@
             [clojure.string :as str]
             [clojure.edn :as edn]))
 
+(def ^:private format->parser {:json #(json/parse-string % true)
+                               :yaml yaml/parse-string
+                               :edn  edn/read-string})
+
 (defn- yml? [type]
   (= type :yml))
 
@@ -17,21 +21,6 @@
           keyword
           ((fn [format] (if (yml? format) :yaml format)))))))
 
-(defn- parse-yaml [file-name]
-  (-> file-name
-      slurp
-      yaml/parse-string))
-
-(defn- parse-json [file-name]
-  (-> file-name
-      slurp 
-      (json/parse-string true)))
-
-(defn- parse-edn [file-name]
-  (-> file-name
-      slurp
-      edn/read-string))
-
 (defn- build-not-supported-exception
   [file-name format]
   (ex-info "File format not supported"
@@ -41,12 +30,15 @@
             :tip (str "Check if the file name has the format explicited (e.g. \".json\") " 
                       "or it is in an unsupported format.")}))
 
+(defn- parse [parser file-name]
+  (-> file-name
+      slurp
+      parser))
+
 (defn- load-config [file-name]
   (let [format (get-file-format file-name)]
-    (case format 
-      :json (parse-json file-name)
-      :yaml (parse-yaml file-name)
-      :edn (parse-edn file-name)
+    (if-let [parser (format->parser format)]
+      (parse parser file-name)
       (throw (build-not-supported-exception file-name
                                             format)))))
 
