@@ -21,7 +21,7 @@
           keyword
           ((fn [format] (if (yml? format) :yaml format)))))))
 
-(defn- build-not-supported-exception
+(defn- file-format-not-supported-exception
   [file-name format]
   (ex-info "File format not supported"
            {:reason ::file-format-not-supported-exception
@@ -39,8 +39,8 @@
   (let [format (get-file-format file-name)]
     (if-let [parser (format->parser format)]
       (parse parser file-name)
-      (throw (build-not-supported-exception file-name
-                                            format)))))
+      (throw (file-format-not-supported-exception file-name
+                                                  format)))))
 
 (defrecord Config [file-name] 
   component/Lifecycle
