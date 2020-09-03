@@ -1,4 +1,4 @@
-(defproject eduardoeof/config-component "1.0.0"
+(defproject eduardoeof/config-component "1.0.1"
   :description "A stuartsierra/component for config files in JSON, YAML and EDN formats."
   :url "https://github.com/eduardoeof/config-component"
   :license {:name "The MIT License"
