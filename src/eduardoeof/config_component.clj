@@ -24,7 +24,7 @@
 (defn- file-format-not-supported-exception
   [file-name format]
   (ex-info "File format not supported"
-           {:reason ::file-format-not-supported-exception
+           {:exception-type ::file-format-not-supported-exception
             :file-name file-name
             :format format
             :tip (str "Check if the file name has the format explicited (e.g. \".json\") " 
