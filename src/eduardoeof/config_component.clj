@@ -46,12 +46,19 @@
   component/Lifecycle
 
   (start [this]
+    "Returns a keyword map with all keys/values from the file in file-name. The file type
+    in file-name (e.g. json) defines the parser used by config-component"
     (let [config (load-config file-name)]
       (merge this config)))
 
   (stop [this]
+    "Returns nil. To reload the file, will be necessary to recreate the component
+    with new-config function."
     nil))
 
-(defn new-config [file-name]
+(defn new-config
+  "Returns a empty config-component with only file-name. Config file's keys/values are
+  loaded when called the component's start function."
+  [file-name]
   (map->Config {:file-name file-name}))
 
