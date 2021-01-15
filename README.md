@@ -51,7 +51,7 @@ Important to meation that all keys will be converted as keywords, no matter the 
 
 ### Error
 
-If the config file name doesn't have an extention or the file doesn't exist, an exception will be thrwon:
+If the config file name doesn't have an extention or the file doesn't exist, an exception will be thrown:
 
 ![exception](img/exception.png)
 
