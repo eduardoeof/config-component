@@ -7,4 +7,6 @@
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [com.stuartsierra/component "1.0.0"]
                  [clj-commons/clj-yaml "0.7.0"]
-                 [cheshire "5.10.0"]])
+                 [cheshire "5.10.0"]]
+  
+  :profiles {:dev {:dependencies [[nubank/matcher-combinators "3.1.4"]]}})
